@@ -4,7 +4,7 @@ stages:
 
 build test-frontend:
   stage: build
-  image: node:12-alpine
+  image: test-frontend
   cache:
     paths:
       - node_modules

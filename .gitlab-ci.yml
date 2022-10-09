@@ -1,17 +1,21 @@
 stages:
   - build
   - deploy
+
 build test-frontend:
   stage: build
-  only:
-    refs:
-      - main
+  image: node:12-alpine
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - dist
   tags:
-    - main
+    - frontlatest
   script:
-    - npm install --progress=false
+    - npm install
     - npm run build
-    - docker build -t test-frontend .
 
 deploy test-frontend:
   stage: deploy
@@ -19,8 +23,8 @@ deploy test-frontend:
     refs:
       - main
   tags:
-    - main
+    - frontlatest
   script:
-    - cd /opt/frontend
-    - docker-compose down
-    - docker-compose up -d
+    - mkdir -p ~/frontend
+    - rm -rf ~/frontend/*
+    - cp -r dist/0302-frontend/. ~/frontend

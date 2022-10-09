@@ -24,6 +24,6 @@ deploy test-frontend:
   tags:
     - frontlatest
   script:
-    - mkdir -p ~/frontend
-    - rm -rf ~/frontend/*
-    - cp -r 0302-frontend/. ~/frontend
+    - cd /opt/frontend
+    - docker-compose down
+    - docker-compose up -d

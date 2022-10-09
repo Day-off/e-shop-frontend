@@ -2,7 +2,6 @@ stages:
   - build
   - deploy
 build test-frontend:
-  image: node:6
   stage: build
   only:
     refs:
@@ -15,7 +14,6 @@ build test-frontend:
     - docker build -t test-frontend .
 
 deploy test-frontend:
-  image: alpine
   stage: deploy
   only:
     refs:

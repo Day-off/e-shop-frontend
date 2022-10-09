@@ -26,4 +26,4 @@ deploy test-frontend:
   script:
     - mkdir -p ~/frontend
     - rm -rf ~/frontend/*
-    - cp -r dist/0302-frontend/. ~/frontend
+    - cp -r 0302-frontend/. ~/frontend

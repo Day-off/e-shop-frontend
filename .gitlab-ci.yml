@@ -14,8 +14,7 @@ build test-frontend:
   tags:
     - frontlatest
   script:
-    - npm install
-    - npm run build
+    - docker build -t test-frontend .
 
 deploy test-frontend:
   stage: deploy

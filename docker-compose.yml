@@ -1,7 +1,7 @@
 version: "3.7" # optional since v1.27.0
 services:
   frontend:
-    image: web-frontend:latest
+    image: web-project:frontlatest
     container_name: frontend
     restart: always
     ports:

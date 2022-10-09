@@ -1,11 +1,8 @@
 version: "3.7" # optional since v1.27.0
 services:
   frontend:
-    image: test-frontend:frontlatest
+    image: web-project:frontlatest
     container_name: frontend
     restart: always
     ports:
       - '8081:8080'
-    volumes:
-      - '.:/app'
-      - '/app/node_modules'

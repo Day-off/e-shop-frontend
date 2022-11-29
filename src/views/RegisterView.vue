@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     postData() {
-      this.posts = axios.post("/api/users", this.posts)
+      this.posts = axios.post("/api/public/register", this.posts)
     }
   }
 };

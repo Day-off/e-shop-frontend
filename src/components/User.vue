@@ -32,7 +32,7 @@ export default {
   name: 'Users',
   data(){
     return {
-      users : []
+      users : null
     }
 
   },
@@ -41,11 +41,16 @@ export default {
       UserService.getUsers().then((response) =>{
         this.users = response.data;
       });
+    },
+    posUser(){
+      UserService.postUsers().then((response) =>{
+        this.users = response.data;
+      })
     }
   },
   created() {
     this.gerUsers()
-
+    this.posUser()
   }
 
 

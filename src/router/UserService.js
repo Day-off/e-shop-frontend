@@ -6,6 +6,9 @@ class UserService{
     getUsers(){
         return axios.get(USER_API_BASE_URL);
     }
+    postUsers(){
+        return axios.post(USER_API_BASE_URL);
+    }
 }
 
 export default new UserService()

@@ -3,7 +3,10 @@
     <div class="col-sm-3 mx-auto">
       <h1>Add Post</h1>
       <br>
-      <form class="row g-3" @submit="postData">
+      <div class="col-15">
+        <label for="inputUser" class="form-label">Creator_Id</label>
+        <input type="text" class="form-control" id="inputUser" v-model="posts.userId">
+      </div>
         <div class="col-md-5">
           <label for="inputHead" class="form-label">Head</label>
           <input type="text" class="form-control" id="inputHead" v-model="posts.head">
@@ -17,20 +20,21 @@
           <input type="text" class="form-control" id="inputDescription" v-model="posts.description">
         </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-primary">Create Post</button>
+          <button @click="postData" class="btn btn-primary">Create Post</button>
         </div>
-      </form>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import VueJwtDecode from "vue-jwt-decode";
 
 export default {
   data(){
     return {
       posts: {
+        userId: null,
         head: null,
         description: null,
         imageLink: null,
@@ -39,13 +43,19 @@ export default {
   },
   methods: {
     postData() {
-      this.posts = axios.post("/api/posts", this.posts)
+      let token = JSON.parse(localStorage.getItem("token"))
+      if (token != null) {
+        let userData = VueJwtDecode.decode(token);
+        this.posts.head = userData["head"]
+        this.posts = axios.post('/api/posts', this.posts)
+      }
+      else alert("User not logged in.")
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 label {
   margin-top: 15px;
 }

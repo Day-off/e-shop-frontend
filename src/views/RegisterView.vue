@@ -21,7 +21,7 @@
           <input type="password" class="form-control" id="inputPassword" v-model="posts.password" style="margin-bottom: 10px">
         </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-primary">Create account</button>
+          <router-link to="/login"><button type="submit" class="btn btn-primary" v-on:click=postData>Create account</button></router-link>
         </div>
       </form>
     </div>
@@ -39,7 +39,7 @@ export default {
         lastName: null,
         email: null,
         password: null
-      }
+      },
     }
   },
   methods: {

@@ -1,4 +1,8 @@
 <template>
+  <div>
+    <p id="left">User Profile</p>
+    <p id="left">{{ this.emailUser}}</p>
+  </div>
   <div class="row">
     <div class="col-sm-3 mx-auto">
       <h1>Add Post</h1>
@@ -38,7 +42,10 @@ export default {
         imageId: null,
       },
       formData: null,
-      uploaded: false
+      uploaded: false,
+      emailUser: "",
+      nameUser: "",
+      secondNameUser: ""
     }
   },
   methods: {
@@ -70,6 +77,16 @@ export default {
       this.uploaded = true;
     },
   },
+  async created() {
+    let token = JSON.parse(localStorage.getItem("token"))
+    if (token != null) {
+      let userData = VueJwtDecode.decode(token);
+      this.emailUser = userData["email"];
+      console.log("User email : " + this.emailUser)
+    } else {
+      this.emailUser = "User is not logged";
+    }
+  }
 };
 </script>
 

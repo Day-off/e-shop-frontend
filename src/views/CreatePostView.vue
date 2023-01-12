@@ -43,9 +43,7 @@ export default {
       },
       formData: null,
       uploaded: false,
-      emailUser: "",
-      nameUser: "",
-      secondNameUser: ""
+      emailUser: ""
     }
   },
   methods: {

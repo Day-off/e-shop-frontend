@@ -21,6 +21,10 @@ function login() {
         if (token) {
           router.push("/create");
         }
+        else {
+          alert("Email or password is incorrect !")
+          router.back();
+        }
       })
 }
 </script>

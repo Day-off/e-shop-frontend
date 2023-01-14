@@ -8,10 +8,11 @@ function logout() {
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
+    <router-link to="/posts">Posts</router-link> |
     <router-link to="/login">Login</router-link> |
     <router-link to="/register">Register</router-link> |
-    <router-link to="/create">Add Post</router-link>
-    <router-link to="/"><input type="button" v-on:click="logout" class="btn btn-primary" value="Logout"></router-link>
+    <router-link to="/create">Add Post  </router-link>
+    <router-link to="/"><input type="button" v-on:click="logout" class="feedback" value="Logout"></router-link>
   </nav>
   <router-view/>
 </template>
@@ -34,7 +35,11 @@ nav a {
   color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+.feedback {
+  background-color : #31B0D5;
+  color: white;
+  padding: 10px 10px;
+  border-radius: 4px;
+  border-color: #46b8da;
 }
 </style>

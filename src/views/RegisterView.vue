@@ -6,19 +6,19 @@
       <form class="row g-3" @submit="postData">
         <div class="col-md-6">
           <label for="inputFirstName" class="form-label">First name</label>
-          <input type="text" class="form-control" id="inputFirstName" v-model="posts.firstName">
+          <input type="text" class="form-control" id="inputFirstName" v-model="users.firstName">
         </div>
         <div class="col-md-6">
           <label for="inputLastName" class="form-label">Last name</label>
-          <input type="text" class="form-control" id="inputLastName" v-model="posts.lastName">
+          <input type="text" class="form-control" id="inputLastName" v-model="users.lastName">
         </div>
         <div class="col-12">
           <label for="inputEmail" class="form-label">Email</label>
-          <input type="email" class="form-control" id="inputEmail" v-model="posts.email">
+          <input type="email" class="form-control" id="inputEmail" v-model="users.email">
         </div>
         <div class="col-12">
           <label for="inputPassword" class="form-label">Password</label>
-          <input type="password" class="form-control" id="inputPassword" v-model="posts.password" style="margin-bottom: 10px">
+          <input type="password" class="form-control" id="inputPassword" v-model="users.password" style="margin-bottom: 10px">
         </div>
         <div class="col-12">
           <router-link to="/login"><button type="submit" class="btn btn-primary" v-on:click=postData>Create account</button></router-link>
@@ -34,7 +34,7 @@ import axios from "axios";
 export default {
   data(){
     return {
-      posts: {
+      users: {
         firstName: null,
         lastName: null,
         email: null,
@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     postData() {
-      this.posts = axios.post("/api/public/register", this.posts)
+      this.users = axios.post("/api/public/register", this.users)
     }
   }
 };

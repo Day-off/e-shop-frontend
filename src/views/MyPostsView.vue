@@ -41,7 +41,7 @@ export default {
       this.posts = (await axios.get("api/public/mypost?page=0&orderBy=id&userId=" + this.user.id)).data;
     }
     else {
-      alert("User is not logged")
+      alert("You need to login to see your posts")
       router.back();
     }
   },

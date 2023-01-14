@@ -36,10 +36,9 @@ export default {
   },
 }
 </script>
-
 <template>
   <div>
-    <h4>Here you can see all the available  posts</h4>
+    <h2><strong>Here you can see all the available  posts</strong></h2>
     <h4>Page: {{ this.page + 1 }}</h4>
   </div>
   <div id="mybutton2" class="col-sm-6 mx-auto" style="padding: 9px">
@@ -58,24 +57,18 @@ export default {
         <th></th>
       </tr>
       <tr v-for="post of posts" :key="post.id">
-        <td>
-          <div class="hover10">
-            <div class="container">
-              <figure>
-                <img v-bind:src="'/api/public/images/' + post.imageId" class="rounded-card" alt="image" v-on:click="viewProduct(post.id)">
-                <div class="text-centered">VIEW POST</div>
-              </figure>
-            </div>
+        <strong>{{ post.head }}</strong>
+        <div class="hover10">
+          <div class="container">
+            <figure>
+              <img v-bind:src="'/api/public/images/' + post.imageId" class="rounded-card" alt="image">
+            </figure>
           </div>
-        </td>
+        </div>
         <td>
-          <ul class="nav-fill">
-            <li>{{ post.description }}</li>
-          </ul>
+          <strong>Description: </strong>
+          <p> {{ post.description }}</p>
         </td>
-        <ul class="nav-fill">
-          <li>{{ post.head }}</li>
-        </ul>
       </tr>
     </table>
   </div>
@@ -93,11 +86,6 @@ img {
   height: auto;
   width: auto;
   padding: 20px;
-}
-ul.nav-fill {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
 }
 
 
@@ -119,5 +107,8 @@ ul.nav-fill {
   position: fixed;
   bottom: -4px;
   left: 5px;
+}
+strong {
+  font-weight: bold;
 }
 </style>

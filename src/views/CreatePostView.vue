@@ -1,32 +1,3 @@
-<template>
-  <div>
-    <p id="left">User Profile</p>
-    <p id="left">{{ this.emailUser}}</p>
-  </div>
-  <div class="row">
-    <div class="col-sm-3 mx-auto">
-      <h1>Create a new Post</h1>
-      <br>
-      <div class="col-form-label-sm">
-        <label for="inputHead" class="form-label">Head</label>
-        <input type="text" class="form-control" id="inputHead" v-model="posts.head">
-      </div>
-      <div class="col-md-12">
-        <label for="inputImage" class="form-label">Image</label>
-        <input type="file" ref="uploadImage" @change="onImageUpload()" class="form-control" required id="inputImage">
-        <input type="button" class="feedback" @click="startUpload" name="Upload" value="Upload">
-      </div>
-      <div class="col-12">
-        <label for="inputDescription" class="form-label">Description</label>
-        <input type="text" class="form-control" id="inputDescription" v-model="posts.description">
-      </div>
-      <div class="col-12">
-        <button @click="postData" class="feedback">Create Post</button>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script>
 import axios from "axios";
 import VueJwtDecode from "vue-jwt-decode";
@@ -62,7 +33,7 @@ export default {
         }
       }
       else alert("User not logged in.")
-        router.back()
+      router.back()
     },
     onImageUpload() {
       let file = this.$refs.uploadImage.files[0];
@@ -94,6 +65,35 @@ export default {
   }
 };
 </script>
+
+<template>
+  <div>
+    <p id="left">User Profile</p>
+    <p id="left">{{ this.emailUser}}</p>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 mx-auto">
+      <h1>Create a new Post</h1>
+      <br>
+      <div class="col-form-label-sm">
+        <label for="inputHead" class="form-label">Head</label>
+        <input type="text" class="form-control" id="inputHead" v-model="posts.head">
+      </div>
+      <div class="col-md-12">
+        <label for="inputImage" class="form-label">Image</label>
+        <input type="file" ref="uploadImage" @change="onImageUpload()" class="form-control" required id="inputImage">
+        <input type="button" class="feedback" @click="startUpload" name="Upload" value="Upload">
+      </div>
+      <div class="col-12">
+        <label for="inputDescription" class="form-label">Description</label>
+        <input type="text" class="form-control" id="inputDescription" v-model="posts.description">
+      </div>
+      <div class="col-12">
+        <button @click="postData" class="feedback">Create Post</button>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 label {

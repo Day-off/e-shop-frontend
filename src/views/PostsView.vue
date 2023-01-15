@@ -25,10 +25,6 @@ export default {
         console.log(this.posts)
       }
     },
-
-    async viewProduct(postId) {
-      localStorage.setItem("postId", postId)
-    }
   },
 
   async created() {

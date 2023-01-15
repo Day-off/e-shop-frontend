@@ -30,6 +30,7 @@
 
 <script>
 import axios from "axios";
+import router from "@/router";
 
 export default {
   data(){
@@ -45,6 +46,13 @@ export default {
   methods: {
     postData() {
       this.users = axios.post("/api/public/register", this.users)
+    }
+  },
+  async created() {
+    let token = JSON.parse(localStorage.getItem("token"))
+    if (token != null) {
+      alert("You are already logged")
+      router.back();
     }
   }
 };

@@ -37,9 +37,13 @@ export default {
       localStorage.setItem("postId", postId)
     },
     deletePost(postId) {
-      this.postToDelete.id = postId
-      console.log("Posts: "+ this.postToDelete.id)
-      axios.post('/api/public/delete', this.postToDelete)
+      let token = JSON.parse(localStorage.getItem("token"))
+      if (token != null) {
+        axios.defaults.headers.common["Authorization"] = "Bearer " + token
+        this.postToDelete.id = postId
+        console.log("Posts: "+ this.postToDelete.id)
+        axios.post('/api/posts/delete', this.postToDelete)
+      }
     }
   },
 

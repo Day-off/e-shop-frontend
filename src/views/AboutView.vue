@@ -5,8 +5,8 @@
     </div>
     <div class="about-page__content">
       <p class="about-page__description">Bulletin board - fresh ads of individuals about the sale and purchase of goods of all categories. The easiest way to sell or buy things.</p>
-      <div class="about-page__image-container">
-        <img class="about-page__image" src="../assets/lolotype.png" alt="About Us">
+      <div class="activity-page__image-container">
+        <img class="activity-page__image" src="../assets/logotype.png" alt="About Us">
       </div>
     </div>
   </div>
@@ -42,13 +42,13 @@
   margin-bottom: 2rem;
 }
 
-.about-page__image-container {
+.activity-page__image-container {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
 }
 
-.about-page__image {
+.activity-page__image {
   width: 50%;
 }
 </style>

@@ -8,7 +8,8 @@
     <router-link to="/posts">Posts</router-link> |
     <router-link to="/login">Login</router-link> |
     <router-link to="/register">Register</router-link> |
-    <router-link to="/profile">User Profile</router-link>
+    <router-link to="/profile">User Profile</router-link> |
+    <router-link to="/activity">Activities</router-link>
   </nav>
   <router-view/>
 </template>

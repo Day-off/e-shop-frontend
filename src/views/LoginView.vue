@@ -19,7 +19,7 @@ function login() {
         axios.defaults.headers.common["Authorization"] = "Bearer " + token
         localStorage.setItem("token", JSON.stringify(token))
         if (token) {
-          router.push("/create");
+          router.push("/profile");
         }
         else {
           alert("Email or password is incorrect !")

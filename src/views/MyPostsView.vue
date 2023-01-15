@@ -32,10 +32,6 @@ export default {
         console.log(this.posts)
       }
     },
-
-    async viewProduct(postId) {
-      localStorage.setItem("postId", postId)
-    },
     deletePost(postId) {
       let token = JSON.parse(localStorage.getItem("token"))
       if (token != null) {
@@ -43,7 +39,12 @@ export default {
         this.postToDelete.id = postId
         console.log("Posts: "+ this.postToDelete.id)
         axios.post('/api/posts/delete', this.postToDelete)
+        location.reload()
       }
+    },
+    goToCreatePost() {
+      router.push("/create")
+      router.go(1)
     }
   },
 
@@ -66,10 +67,13 @@ export default {
     <h4>Page: {{ this.page + 1 }}</h4>
   </div>
   <div id="mybutton" class="col-sm-6 mx-auto" style="padding: 9px">
-    <input type="button" v-on:click="nextPage" class="feedback" style="margin-left: 5px" value="NEXT">
+    <input type="button" v-on:click="nextPage" class="feedback2" style="margin-left: 5px" value="NEXT">
   </div>
   <div id="mybutton2" class="col-sm-6 mx-auto" style="padding: 9px">
-    <input type="button" v-on:click="previousPage" class="feedback" style="margin-right: 5px" value="PREVIOUS">
+    <input type="button" v-on:click="previousPage" class="feedback2" style="margin-right: 5px" value="PREVIOUS">
+  </div>
+  <div id="mybutton3" class="col-sm-6 mx-auto" style="padding: 9px">
+    <input type="button" v-on:click="goToCreatePost" class="feedback" style="margin-right: 5px" value="Create New Post">
   </div>
   <div class="col-sm-10 mx-auto">
     <table>
@@ -80,7 +84,7 @@ export default {
         <th></th>
       </tr>
       <tr v-for="post of posts" :key="post.id">
-        <div id="mybutton3" class="col-sm-6 mx-auto" style="padding: 9px">
+        <div id="mybutton4" class="col-sm-6 mx-auto" style="padding: 9px">
           <input type="button" v-on:click="deletePost(post.id)" class="feedback" style="margin-right: 5px" value="Delete">
         </div>
         <strong>{{ post.head }}</strong>
@@ -123,6 +127,14 @@ img {
   border-color: #46b8da;
 }
 
+.feedback2 {
+  background-color : lightcoral;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border-color: lightcoral;
+}
+
 #mybutton {
   position: fixed;
   bottom: -4px;
@@ -137,8 +149,14 @@ img {
 
 #mybutton3 {
   position: fixed;
-  bottom: 200px;
+  bottom: 100px;
   right: 5px;
+}
+
+#mybutton4 {
+  position: fixed;
+  bottom: 100px;
+  left: 1px;
 }
 strong {
   font-weight: bold;

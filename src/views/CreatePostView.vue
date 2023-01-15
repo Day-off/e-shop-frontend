@@ -21,19 +21,22 @@ export default {
     postData() {
       let token = JSON.parse(localStorage.getItem("token"))
       if (token != null) {
-        if (this.uploaded !== false){
+        if (this.uploaded !== false && this.posts.description != null && this.posts.head != null){
           let userData = VueJwtDecode.decode(token);
           this.posts.userId = userData["id"]
           this.posts = axios.post('/api/posts', this.posts)
           this.uploaded = false;
-        }
-        else {
-          alert("Post should contain the image !")
           router.back()
         }
+        else {
+          alert("Parameters are missed or image is not uploaded !")
+          location.reload()
+        }
       }
-      else alert("User not logged in.")
-      router.back()
+      else {
+        alert("User not logged in.")
+        router.back()
+      }
     },
     onImageUpload() {
       let file = this.$refs.uploadImage.files[0];
@@ -61,17 +64,14 @@ export default {
       this.emailUser = userData["email"];
       console.log("User email : " + this.emailUser)
     } else {
-      this.emailUser = "User is not logged";
+      alert("You need to sign up !")
+      router.back()
     }
   }
 };
 </script>
 
 <template>
-  <div>
-    <p id="left">User Profile</p>
-    <p id="left">{{ this.emailUser}}</p>
-  </div>
   <div class="row">
     <div class="col-sm-3 mx-auto">
       <h1>Create a new Post</h1>

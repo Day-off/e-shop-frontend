@@ -1,7 +1,4 @@
 <script setup>
-function logout() {
-  localStorage.removeItem("token")
-}
 </script>
 
 <template>
@@ -10,10 +7,8 @@ function logout() {
     <router-link to="/about">About</router-link> |
     <router-link to="/posts">Posts</router-link> |
     <router-link to="/login">Login</router-link> |
-    <router-link to="/myposts">My Posts</router-link> |
     <router-link to="/register">Register</router-link> |
-    <router-link to="/create">Add Post</router-link> |
-    <router-link to="/"><input type="button" v-on:click="logout" class="feedback" value="Logout"></router-link>
+    <router-link to="/profile">User Profile</router-link>
   </nav>
   <router-view/>
 </template>

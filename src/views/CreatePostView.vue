@@ -56,6 +56,7 @@ export default {
   async created() {
     let token = JSON.parse(localStorage.getItem("token"))
     if (token != null) {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token
       let userData = VueJwtDecode.decode(token);
       this.emailUser = userData["email"];
       console.log("User email : " + this.emailUser)

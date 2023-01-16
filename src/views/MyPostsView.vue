@@ -9,6 +9,7 @@ export default {
     return {
       postToDelete: {
         id: null,
+        isavailable: null
       },
       user: null,
       posts: [],
@@ -32,14 +33,20 @@ export default {
         console.log(this.posts)
       }
     },
-    deletePost(postId) {
+    async deletePost(postId, isavailable) {
       let token = JSON.parse(localStorage.getItem("token"))
-      if (token != null) {
+      if (token != null && isavailable !== false) {
         axios.defaults.headers.common["Authorization"] = "Bearer " + token
         this.postToDelete.id = postId
+        this.postToDelete.isavailable = isavailable
         console.log("Posts: "+ this.postToDelete.id)
-        axios.post('/api/posts/delete', this.postToDelete)
+        console.log("Post available: "+ this.postToDelete.isavailable)
+        await axios.post('/api/posts/delete', this.postToDelete)
         location.reload()
+      }
+      else {
+        alert("Can not delete reserved post !")
+        router.back();
       }
     },
     goToCreatePost() {
@@ -98,7 +105,7 @@ export default {
         </td>
         <div class="col-sm-4-auto" style="padding: 9px">
           <br>
-          <input type="button" v-on:click="deletePost(post.id)" class="feedback" style="margin-right: 5px" value="Delete">
+          <input type="button" v-on:click="deletePost(post.id, post.isAvailable)" class="feedback" style="margin-right: 5px" value="Delete">
         </div>
       </tr>
     </table>

@@ -1,9 +1,16 @@
 <script>
 import axios from "axios";
+import router from "@/router";
+import VueJwtDecode from "vue-jwt-decode";
 
 export default {
   data() {
     return {
+      postToBuy: {
+        postId: null,
+        userId: null,
+        available: null
+      },
       posts: [],
       page: 0
     }
@@ -25,8 +32,25 @@ export default {
         console.log(this.posts)
       }
     },
+    buyPost(isAvailable, id) {
+      let token = JSON.parse(localStorage.getItem("token"))
+      if (token != null && isAvailable !== false) {
+        axios.defaults.headers.common["Authorization"] = "Bearer " + token
+        let userData = VueJwtDecode.decode(token);
+        this.postToBuy.userId = userData["id"]
+        this.postToBuy.postId = id
+        console.log("Post to buy: "+ this.postToBuy.postId)
+        console.log("User who buys : "+ this.postToBuy.userId)
+        axios.get('/api/posts/buy?&postId=' + this.postToBuy.postId + "&userId=" + this.postToBuy.userId)
+        console.log(this.posts)
+        router.push("/posts")
+      }
+      else {
+        alert("User is not logged or post is reserved.")
+        router.back()
+      }
+    }
   },
-
   async created() {
     this.posts = (await axios.get("api/public/?page=0&orderBy=id")).data;
   },
@@ -65,6 +89,10 @@ export default {
           <strong>Description: </strong>
           <p> {{ post.description }}</p>
         </td>
+        <div class="col-sm-4-auto" style="padding: 9px">
+          <br>
+          <input type="button" v-on:click="buyPost(post.isAvailable, post.id)" class="feedback" style="margin-right: 5px" value="Reserve">
+        </div>
       </tr>
     </table>
   </div>

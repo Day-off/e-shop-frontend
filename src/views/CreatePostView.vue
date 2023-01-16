@@ -11,6 +11,7 @@ export default {
         head: null,
         description: null,
         imageId: null,
+        isAvailable: null
       },
       formData: null,
       uploaded: false,
@@ -18,24 +19,23 @@ export default {
     }
   },
   methods: {
-    postData() {
+    async postData() {
       let token = JSON.parse(localStorage.getItem("token"))
       if (token != null) {
-        if (this.uploaded !== false && this.posts.description != null && this.posts.head != null){
+        axios.defaults.headers.common["Authorization"] = "Bearer " + token
+        if (this.uploaded !== false && this.posts.description !== null && this.posts.head !== null){
           let userData = VueJwtDecode.decode(token);
           this.posts.userId = userData["id"]
           this.posts = axios.post('/api/posts', this.posts)
           this.uploaded = false;
-          router.push("/myposts").then(location.reload)
+          await router.push("/myposts")
         }
         else {
           alert("Parameters are missed or image is not uploaded !")
-          location.reload()
         }
       }
       else {
         alert("User not logged in.")
-        router.back()
       }
     },
     onImageUpload() {

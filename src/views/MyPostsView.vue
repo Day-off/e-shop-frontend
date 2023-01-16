@@ -33,7 +33,7 @@ export default {
         console.log(this.posts)
       }
     },
-    deletePost(postId, isavailable) {
+    async deletePost(postId, isavailable) {
       let token = JSON.parse(localStorage.getItem("token"))
       if (token != null && isavailable !== false) {
         axios.defaults.headers.common["Authorization"] = "Bearer " + token
@@ -41,7 +41,7 @@ export default {
         this.postToDelete.isavailable = isavailable
         console.log("Posts: "+ this.postToDelete.id)
         console.log("Post available: "+ this.postToDelete.isavailable)
-        axios.post('/api/posts/delete', this.postToDelete)
+        await axios.post('/api/posts/delete', this.postToDelete)
         location.reload()
       }
       else {

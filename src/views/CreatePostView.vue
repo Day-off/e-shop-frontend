@@ -32,12 +32,10 @@ export default {
         }
         else {
           alert("Parameters are missed or image is not uploaded !")
-          location.reload()
         }
       }
       else {
         alert("User not logged in.")
-        router.back()
       }
     },
     onImageUpload() {

@@ -26,7 +26,7 @@ export default {
           this.posts.userId = userData["id"]
           this.posts = axios.post('/api/posts', this.posts)
           this.uploaded = false;
-          router.back()
+          router.push("/myposts").then(location.reload)
         }
         else {
           alert("Parameters are missed or image is not uploaded !")

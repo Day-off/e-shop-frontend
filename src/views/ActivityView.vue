@@ -60,7 +60,7 @@ export default {
 }
 
 .activity-page__image {
-  width: 120%;
+  width: 100%;
 }
 
 </style>

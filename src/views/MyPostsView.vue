@@ -73,7 +73,7 @@ export default {
     <input type="button" v-on:click="previousPage" class="feedback2" style="margin-right: 5px" value="PREVIOUS">
   </div>
   <div id="mybutton3" class="col-sm-6 mx-auto" style="padding: 9px">
-    <input type="button" v-on:click="goToCreatePost" class="feedback" style="margin-right: 5px" value="Create New Post">
+    <input type="button" v-on:click="goToCreatePost" class="feedback2" style="margin-right: 5px" value="Create New Post">
   </div>
   <div class="col-sm-10 mx-auto">
     <table>
@@ -84,9 +84,6 @@ export default {
         <th></th>
       </tr>
       <tr v-for="post of posts" :key="post.id">
-        <div id="mybutton4" class="col-sm-6 mx-auto" style="padding: 9px">
-          <input type="button" v-on:click="deletePost(post.id)" class="feedback" style="margin-right: 5px" value="Delete">
-        </div>
         <strong>{{ post.head }}</strong>
         <div class="hover10">
           <div class="container">
@@ -99,6 +96,10 @@ export default {
           <strong>Description: </strong>
           <p> {{ post.description }}</p>
         </td>
+        <div class="col-sm-4-auto" style="padding: 9px">
+          <br>
+          <input type="button" v-on:click="deletePost(post.id)" class="feedback" style="margin-right: 5px" value="Delete">
+        </div>
       </tr>
     </table>
   </div>

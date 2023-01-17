@@ -11,10 +11,6 @@ export default {
         id: null,
         isavailable: null
       },
-      postToUpdate: {
-        id: null,
-        header: null
-      },
       user: null,
       posts: [],
       page: 0

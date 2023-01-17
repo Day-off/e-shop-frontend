@@ -9,7 +9,8 @@ export default {
       postToBuy: {
         postId: null,
         userId: null,
-        available: null
+        available: null,
+        imageId: null
       },
       posts: [],
       page: 0
@@ -32,21 +33,28 @@ export default {
         console.log(this.posts)
       }
     },
-    buyPost(isAvailable, id) {
+    buyPost(id, userId, imageId) {
       let token = JSON.parse(localStorage.getItem("token"))
-      if (token != null && isAvailable !== false) {
-        axios.defaults.headers.common["Authorization"] = "Bearer " + token
+      if (token != null) {
         let userData = VueJwtDecode.decode(token);
         this.postToBuy.userId = userData["id"]
-        this.postToBuy.postId = id
-        console.log("Post to buy: "+ this.postToBuy.postId)
-        console.log("User who buys : "+ this.postToBuy.userId)
-        axios.get('/api/posts/buy?&postId=' + this.postToBuy.postId + "&userId=" + this.postToBuy.userId)
-        console.log(this.posts)
-        router.push("/posts")
+        if (this.postToBuy.userId !== userId) {
+          axios.defaults.headers.common["Authorization"] = "Bearer " + token
+          this.postToBuy.postId = id
+          this.postToBuy.imageId = imageId
+          console.log("Post to buy: "+ this.postToBuy.postId)
+          console.log("User who buys : "+ this.postToBuy.userId)
+          axios.get('/api/posts/buy?&postId=' + this.postToBuy.postId + "&userId=" + this.postToBuy.userId + "&imageId=" + this.postToBuy.imageId)
+          console.log(this.posts)
+          router.push("/posts")
+        }
+        else {
+          alert("You can not buy your own post!")
+          location.reload()
+        }
       }
       else {
-        alert("User is not logged or post is reserved.")
+        alert("You need to login to buy posts!")
         router.back()
       }
     }
@@ -91,7 +99,7 @@ export default {
         </td>
         <div class="col-sm-4-auto" style="padding: 9px">
           <br>
-          <input type="button" v-on:click="buyPost(post.isAvailable, post.id)" class="feedback" style="margin-right: 5px" value="Reserve">
+          <input type="button" v-on:click="buyPost(post.id, post.userId, post.imageId)" class="feedback" style="margin-right: 5px" value="Reserve">
         </div>
       </tr>
     </table>

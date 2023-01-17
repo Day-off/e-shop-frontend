@@ -46,7 +46,7 @@ export default {
           console.log("User who buys : "+ this.postToBuy.userId)
           axios.get('/api/posts/buy?&postId=' + this.postToBuy.postId + "&userId=" + this.postToBuy.userId + "&imageId=" + this.postToBuy.imageId)
           console.log(this.posts)
-          router.push("/posts")
+          location.reload()
         }
         else {
           alert("You can not buy your own post!")

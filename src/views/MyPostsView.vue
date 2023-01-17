@@ -11,6 +11,10 @@ export default {
         id: null,
         isavailable: null
       },
+      postToUpdate: {
+        id: null,
+        header: null
+      },
       user: null,
       posts: [],
       page: 0
@@ -47,6 +51,14 @@ export default {
       else {
         alert("Can not delete reserved post !")
         router.back();
+      }
+    },
+    updateHeader(id, header) {
+      let token = JSON.parse(localStorage.getItem("token"))
+      if (token != null) {
+        axios.defaults.headers.common["Authorization"] = "Bearer " + token
+        axios.get('/api/posts/update?&id=' + id + "&header=" + header)
+        location.reload()
       }
     },
     goToCreatePost() {
@@ -103,6 +115,14 @@ export default {
           <strong>Description: </strong>
           <p> {{ post.description }}</p>
         </td>
+        <div class="col-form-label-sm">
+          <label for="inputHead" class="form-label">Head</label>
+          <input type="text" class="form-control" id="inputHead" v-model="post.header">
+        </div>
+        <div class="col-sm-4-auto" style="padding: 9px">
+          <br>
+          <input type="button" v-on:click="updateHeader(post.id, post.header)" class="feedback" style="margin-right: 5px" value="Update Header">
+        </div>
         <div class="col-sm-4-auto" style="padding: 9px">
           <br>
           <input type="button" v-on:click="deletePost(post.id, post.isAvailable)" class="feedback" style="margin-right: 5px" value="Delete">
@@ -130,7 +150,7 @@ img {
 .feedback {
   background-color : #31B0D5;
   color: white;
-  padding: 10px 20px;
+  padding: 8px 8px;
   border-radius: 4px;
   border-color: #46b8da;
 }
@@ -138,7 +158,7 @@ img {
 .feedback2 {
   background-color : lightcoral;
   color: white;
-  padding: 10px 20px;
+  padding: 8px 8px;
   border-radius: 4px;
   border-color: lightcoral;
 }

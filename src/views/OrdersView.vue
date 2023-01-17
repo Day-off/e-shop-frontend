@@ -12,7 +12,8 @@ export default {
         userId: null,
         postId: null,
         date: null,
-        imageId: null
+        imageId: null,
+        email: null
       },
       unreservedPost: {
         id: null
@@ -109,8 +110,8 @@ export default {
           </div>
         </div>
         <td>
-          <strong>Your order has nr: </strong>
-          <p> {{ order.postId }}</p>
+          <strong>Contact seller: </strong>
+          <p> {{ order.email }}</p>
         </td>
         <div class="col-sm-4-auto" style="padding: 9px">
           <br>

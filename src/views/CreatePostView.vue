@@ -11,7 +11,8 @@ export default {
         head: null,
         description: null,
         imageId: null,
-        isAvailable: null
+        isAvailable: null,
+        email: null
       },
       formData: null,
       uploaded: false,
@@ -26,6 +27,7 @@ export default {
         if (this.uploaded !== false && this.posts.description !== null && this.posts.head !== null){
           let userData = VueJwtDecode.decode(token);
           this.posts.userId = userData["id"]
+          this.posts.email = userData["email"]
           this.posts = axios.post('/api/posts', this.posts)
           this.uploaded = false;
           await router.push("/myposts")

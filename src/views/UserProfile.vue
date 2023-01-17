@@ -22,7 +22,10 @@ export default {
     logout() {
       localStorage.removeItem("token")
       router.push("/login")
-    }
+    },
+    goToMyOrders() {
+      router.push("/orders")
+    },
   },
 
   async created() {
@@ -50,6 +53,9 @@ export default {
   </div>
   <div id="mybutton4" class="col-sm-6 mx-auto" style="padding: 9px">
     <input type="button" v-on:click="goToMyPosts" class="feedback" style="margin-right: 5px" value="My Posts">
+  </div>
+  <div id="mybutton6" class="col-sm-6 mx-auto" style="padding: 9px">
+    <input type="button" v-on:click="goToMyOrders" class="feedback" style="margin-right: 5px" value="My Orders">
   </div>
   <div id="mybutton5" class="col-sm-6 mx-auto" style="padding: 9px">
       <input type="button" v-on:click="logout" class="feedback" style="margin-right: 5px" value="Logout">
@@ -88,6 +94,12 @@ export default {
 #mybutton5 {
   position: fixed;
   bottom: 10px;
+  right: 5px;
+}
+
+#mybutton6 {
+  position: fixed;
+  bottom: 280px;
   right: 5px;
 }
 

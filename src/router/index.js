@@ -47,6 +47,11 @@ const routes = [
     path: '/activity',
     name: 'activity',
     component: () => import('../views/ActivityView')
+  },
+  {
+    path: '/orders',
+    name: 'orders',
+    component: () => import('../views/OrdersView')
   }
 ]
 

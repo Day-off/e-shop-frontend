@@ -88,9 +88,12 @@ export default {
         <strong>{{ post.head }}</strong>
         <div class="hover10">
           <div class="container">
-            <figure>
+            <div v-if="post.imageId===null">
+              <img src="@/assets/logo.png" alt="image"/>
+            </div>
+            <div v-else>
               <img v-bind:src="'/api/public/images/' + post.imageId" class="rounded-card" alt="image">
-            </figure>
+            </div>
           </div>
         </div>
         <td>

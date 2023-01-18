@@ -89,9 +89,6 @@ export default {
   <div id="mybutton2" class="col-sm-6 mx-auto" style="padding: 9px">
     <input type="button" v-on:click="previousPage" class="feedback2" style="margin-right: 5px" value="PREVIOUS">
   </div>
-  <div id="mybutton3" class="col-sm-6 mx-auto" style="padding: 9px">
-    <input type="button" v-on:click="goToCreatePost" class="feedback2" style="margin-right: 5px" value="Create New Post">
-  </div>
   <div class="col-sm-10 mx-auto">
     <table>
       <caption></caption>
@@ -104,9 +101,12 @@ export default {
         <strong>{{ substring(order.date) }}</strong>
         <div class="hover10">
           <div class="container">
-            <figure>
+            <div v-if="order.imageId==null">
+              <img src="@/assets/logo.png" alt="image"/>
+            </div>
+            <div v-else>
               <img v-bind:src="'/api/public/images/' + order.imageId" class="rounded-card" alt="image">
-            </figure>
+            </div>
           </div>
         </div>
         <td>

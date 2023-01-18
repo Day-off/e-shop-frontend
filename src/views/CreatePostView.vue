@@ -12,11 +12,19 @@ export default {
         description: null,
         imageId: null,
         isAvailable: null,
-        email: null
+        email: null,
+        categoryId: null
+      },
+      category: {
+        id: null,
+        name: null,
+        posts: []
       },
       formData: null,
       uploaded: false,
-      emailUser: ""
+      emailUser: "",
+      selectedOption: null,
+      categories: []
     }
   },
   methods: {
@@ -28,6 +36,7 @@ export default {
           let userData = VueJwtDecode.decode(token);
           this.posts.userId = userData["id"]
           this.posts.email = userData["email"]
+          this.posts.categoryId = this.selectedOption;
           this.posts = axios.post('/api/posts', this.posts)
           this.uploaded = false;
           await router.push("/myposts")
@@ -65,6 +74,8 @@ export default {
       let userData = VueJwtDecode.decode(token);
       this.emailUser = userData["email"];
       console.log("User email : " + this.emailUser)
+      this.categories = (await axios.get("/api/categories")).data;
+      console.log("Categories: " + this.categories[1].id)
     } else {
       alert("You need to sign up !")
       router.back()
@@ -86,6 +97,15 @@ export default {
         <label for="inputImage" class="form-label">Image</label>
         <input type="file" ref="uploadImage" @change="onImageUpload()" class="form-control" required id="inputImage">
         <input type="button" class="feedback" @click="startUpload" name="Upload" value="Upload">
+      </div>
+      <div>
+        <label for="inputHead" class="form-label">Category</label>
+        <br>
+        <select v-model="selectedOption">
+          <option v-for="category in categories" v-bind:key="category.name" v-bind:value="category.id">
+            {{ category.name }}
+          </option>
+        </select>
       </div>
       <div class="col-12">
         <label for="inputDescription" class="form-label">Description</label>

@@ -25,13 +25,59 @@
         <strong>Description: </strong>
         <p> {{ post.description }}</p>
       </td>
+      <div class="col-sm-4-auto" style="padding: 9px">
+        <br>
+        <input type="button" v-on:click="buyPost(post.id, post.userId, post.imageId)" class="feedback" style="margin-right: 5px" value="Reserve">
+      </div>
     </table>
   </div>
 </template>
 
 <script>
+import VueJwtDecode from "vue-jwt-decode";
+import axios from "axios";
+import router from "@/router";
+
 export default {
-  props: ["post"]
+  props: ["post"],
+  data() {
+    return{
+      postToBuy: {
+        postId: null,
+        userId: null,
+        available: null,
+        imageId: null
+      }
+    }
+  },
+  methods:{
+
+    buyPost(id, userId, imageId) {
+      let token = JSON.parse(localStorage.getItem("token"))
+      if (token != null) {
+        let userData = VueJwtDecode.decode(token);
+        this.postToBuy.userId = userData["id"]
+        if (this.postToBuy.userId !== userId) {
+          axios.defaults.headers.common["Authorization"] = "Bearer " + token
+          this.postToBuy.postId = id
+          this.postToBuy.imageId = imageId
+          console.log("Post to buy: "+ this.postToBuy.postId)
+          console.log("User who buys : "+ this.postToBuy.userId)
+          axios.get('/api/posts/buy?&postId=' + this.postToBuy.postId + "&userId=" + this.postToBuy.userId + "&imageId=" + this.postToBuy.imageId)
+          console.log(this.posts)
+          location.reload()
+        }
+        else {
+          alert("You can not buy your own post!")
+          location.reload()
+        }
+      }
+      else {
+        alert("You need to login to buy posts!")
+        router.back()
+      }
+    }
+  }
 }
 </script>
 

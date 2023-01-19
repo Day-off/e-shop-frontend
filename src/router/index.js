@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import AboutPage from '../views/AboutView.vue'
 
 
 const routes = [
@@ -26,7 +27,7 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: AboutPage
   },
   {
     path: '/categories',
@@ -36,22 +37,22 @@ const routes = [
   {
     path: '/myposts',
     name: 'myposts',
-    component: () => import('../views/MyPostsView')
+    component: () => import('../views/MyPostsView.vue')
   },
   {
     path: '/profile',
     name: 'profile',
-    component: () => import('../views/UserProfile')
+    component: () => import('../views/UserProfile.vue')
   },
   {
     path: '/activity',
     name: 'activity',
-    component: () => import('../views/ActivityView')
+    component: () => import('../views/ActivityView.vue')
   },
   {
     path: '/orders',
     name: 'orders',
-    component: () => import('../views/OrdersView')
+    component: () => import('../views/OrdersView.vue')
   }
 ]
 

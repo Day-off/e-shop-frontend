@@ -67,6 +67,7 @@ export default {
   async created() {
     let token = JSON.parse(localStorage.getItem("token"))
     if (token != null) {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token
       this.user = VueJwtDecode.decode(token);
       this.orders = (await axios.get("api/public/orders/?&page=0&orderBy=id&userId=" + this.user.id)).data;
       console.log("Posts " + this.orders[0].id)

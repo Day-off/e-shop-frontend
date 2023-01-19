@@ -54,8 +54,8 @@ export default {
       this.formData = new FormData();
       this.formData.append("file", file);
     },
-    startUpload() {
-      axios({
+    async startUpload() {
+      let data = await axios({
         url: "/api/public/images",
         method: "POST",
         data: this.formData,
@@ -63,7 +63,8 @@ export default {
           Accept: "application/json",
           "Content-Type": "multipart/form-data"
         },
-      })
+      });
+      this.posts.imageId = data.data
       this.uploaded = true;
     },
   },

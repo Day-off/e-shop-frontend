@@ -53,6 +53,7 @@ export default {
       if (token != null) {
         axios.defaults.headers.common["Authorization"] = "Bearer " + token
         axios.get('/api/posts/update?&id=' + id + "&header=" + header)
+        router.back()
       }
     }
   },

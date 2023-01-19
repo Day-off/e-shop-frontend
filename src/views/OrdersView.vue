@@ -102,7 +102,7 @@ export default {
         <strong>{{ substring(order.date) }}</strong>
         <div class="hover10">
           <div class="container">
-            <div v-if="order.imageId==null">
+            <div v-if="order.imageId===null">
               <img src="@/assets/logo.png" alt="image"/>
             </div>
             <div v-else>

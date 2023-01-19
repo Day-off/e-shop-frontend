@@ -42,7 +42,6 @@ export default {
         console.log("Posts: "+ this.postToDelete.id)
         console.log("Post available: "+ this.postToDelete.isavailable)
         await axios.post('/api/posts/delete', this.postToDelete)
-        location.reload()
       }
       else {
         alert("Can not delete reserved post !")
@@ -54,7 +53,6 @@ export default {
       if (token != null) {
         axios.defaults.headers.common["Authorization"] = "Bearer " + token
         axios.get('/api/posts/update?&id=' + id + "&header=" + header)
-        window.location.reload()
       }
     }
   },

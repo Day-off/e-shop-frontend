@@ -54,12 +54,8 @@ export default {
       if (token != null) {
         axios.defaults.headers.common["Authorization"] = "Bearer " + token
         axios.get('/api/posts/update?&id=' + id + "&header=" + header)
-        location.reload()
+        window.location.reload()
       }
-    },
-    goToCreatePost() {
-      router.push("/create")
-      router.go(1)
     }
   },
 
@@ -86,9 +82,6 @@ export default {
   </div>
   <div id="mybutton2" class="col-sm-6 mx-auto" style="padding: 9px">
     <input type="button" v-on:click="previousPage" class="feedback2" style="margin-right: 5px" value="PREVIOUS">
-  </div>
-  <div id="mybutton3" class="col-sm-6 mx-auto" style="padding: 9px">
-    <input type="button" v-on:click="goToCreatePost" class="feedback2" style="margin-right: 5px" value="Create New Post">
   </div>
   <div class="col-sm-10 mx-auto">
     <table>

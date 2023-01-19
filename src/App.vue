@@ -3,11 +3,16 @@
 
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/login">Login</router-link> |
-    <router-link to="/register">Register</router-link> |
-    <router-link to="/profile">User Profile</router-link> |
+    <router-link to="/">Home</router-link>
+    |
+    <router-link to="/about">About</router-link>
+    |
+    <router-link to="/login">Login</router-link>
+    |
+    <router-link to="/register">Register</router-link>
+    |
+    <router-link to="/profile">User Profile</router-link>
+    |
     <router-link to="/activity">Activities</router-link>
   </nav>
   <router-view/>
@@ -32,7 +37,7 @@ nav a {
 }
 
 .feedback {
-  background-color : #31B0D5;
+  background-color: #31B0D5;
   color: white;
   padding: 10px 10px;
   border-radius: 4px;
@@ -46,8 +51,11 @@ import {onUnmounted} from "vue";
 
 export default {
 
-  setup(){
-    onUnmounted(() => localStorage.removeItem("token")
+  setup() {
+    onUnmounted(() => {
+          localStorage.removeItem("token");
+          console.log("token delete");
+        }
     )
   }
 

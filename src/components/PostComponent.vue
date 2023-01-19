@@ -12,7 +12,7 @@
       <div class="hover10">
         <div class="container">
           <figure>
-            <div v-if="post.imageId===null">
+            <div v-if="post.imageId===null || post.imageId === 0">
               <img src="@/assets/logo.png" alt="image"/>
             </div>
             <div v-else>
@@ -46,7 +46,7 @@ export default {
         postId: null,
         userId: null,
         available: null,
-        imageId: null
+        imageId: 0
       }
     }
   },
@@ -60,7 +60,7 @@ export default {
         if (this.postToBuy.userId !== userId) {
           axios.defaults.headers.common["Authorization"] = "Bearer " + token
           this.postToBuy.postId = id
-          this.postToBuy.imageId = imageId
+          this.postToBuy.imageId = imageId ?? 0
           console.log("Post to buy: "+ this.postToBuy.postId)
           console.log("User who buys : "+ this.postToBuy.userId)
           axios.get('/api/posts/buy?&postId=' + this.postToBuy.postId + "&userId=" + this.postToBuy.userId + "&imageId=" + this.postToBuy.imageId)

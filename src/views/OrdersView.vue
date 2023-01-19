@@ -26,6 +26,8 @@ export default {
   },
 
   methods: {
+
+
     async nextPage() {
       if ((await axios.get("api/public/orders/?page=" + (this.page + 1) + "&orderBy=id" + "&userId=" + this.user.id)).data.length > 0) {
         this.page++
@@ -77,6 +79,8 @@ export default {
       router.back();
     }
   },
+
+
 }
 </script>
 <template>
@@ -102,7 +106,7 @@ export default {
         <strong>{{ substring(order.date) }}</strong>
         <div class="hover10">
           <div class="container">
-            <div v-if="order.imageId===null">
+            <div v-if="order.imageId===null || order.imageId===0">
               <img src="@/assets/logo.png" alt="image"/>
             </div>
             <div v-else>

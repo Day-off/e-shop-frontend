@@ -10,7 +10,7 @@ export default {
         postId: null,
         userId: null,
         available: null,
-        imageId: null
+        imageId: 0
       },
 
       category: {

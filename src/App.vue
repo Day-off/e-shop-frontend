@@ -39,3 +39,17 @@ nav a {
   border-color: #46b8da;
 }
 </style>
+
+<script>
+
+import {onUnmounted} from "vue";
+
+export default {
+
+  setup(){
+    onUnmounted(() => localStorage.removeItem("token")
+    )
+  }
+
+}
+</script>

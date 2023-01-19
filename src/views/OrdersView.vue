@@ -56,7 +56,7 @@ export default {
       if (token != null ) {
         axios.defaults.headers.common["Authorization"] = "Bearer " + token
         await axios.delete('/api/posts/deleteOrder?orderId=' + id)
-        location.reload()
+        router.back()
       }
       else {
         alert("Can not delete order ! !")

@@ -12,27 +12,20 @@ export default {
         available: null,
         imageId: null
       },
+
+      category: {
+        id: null,
+        name: null,
+        posts: []
+      },
+      categories: [],
+      selectedOption: 0,
       posts: [],
       page: 0
     }
   },
 
   methods: {
-    async nextPage() {
-      if ((await axios.get("api/public/?page=" + (this.page + 1) + "&orderBy=id")).data.length > 0) {
-        this.page++
-        this.posts = (await axios.get("api/public/?page=" + this.page + "&orderBy=id")).data
-        console.log(this.posts)
-      }
-    },
-
-    async previousPage() {
-      if (this.page > 0) {
-        this.page--
-        this.posts = (await axios.get("api/public/?page=" + this.page + "&orderBy=id")).data
-        console.log(this.posts)
-      }
-    },
     buyPost(id, userId, imageId) {
       let token = JSON.parse(localStorage.getItem("token"))
       if (token != null) {
@@ -46,34 +39,47 @@ export default {
           console.log("User who buys : "+ this.postToBuy.userId)
           axios.get('/api/posts/buy?&postId=' + this.postToBuy.postId + "&userId=" + this.postToBuy.userId + "&imageId=" + this.postToBuy.imageId)
           console.log(this.posts)
-          location.reload()
         }
         else {
           alert("You can not buy your own post!")
-          location.reload()
         }
       }
       else {
         alert("You need to login to buy posts!")
         router.back()
       }
+    },
+    async searchByCategory() {
+      let token = JSON.parse(localStorage.getItem("token"))
+      if (token != null) {
+        axios.defaults.headers.common["Authorization"] = "Bearer " + token
+        this.posts = (await axios.get("api/category?id=" + this.selectedOption)).data.posts;
+      }
     }
   },
   async created() {
-    this.posts = (await axios.get("api/public/?page=0&orderBy=id")).data;
+    let token = JSON.parse(localStorage.getItem("token"))
+    if (token != null) {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token
+      this.posts = (await axios.get("api/category?id=" + this.selectedOption)).data.posts;
+      this.categories = (await axios.get("/api/categories")).data;
+    }
   },
 }
 </script>
 <template>
   <div>
-    <h2><strong>Here you can see all the available  posts</strong></h2>
+    <h2><strong>Here you can search post by category</strong></h2>
     <h4>Page: {{ this.page + 1 }}</h4>
   </div>
-  <div id="mybutton2" class="col-sm-6 mx-auto" style="padding: 9px">
-    <input type="button" v-on:click="previousPage" class="feedback" style="margin-right: 5px" value="PREVIOUS">
-  </div>
-  <div id="mybutton" class="col-sm-6 mx-auto" style="padding: 9px">
-    <input type="button" v-on:click="nextPage" class="feedback" style="margin-left: 5px" value="NEXT">
+  <select v-model="selectedOption">
+    <option v-for="category in categories" v-bind:key="category.name" v-bind:value="category.id">
+      {{ category.name }}
+    </option>
+  </select>
+
+  <div id="mybutton3" class="col-sm-6 mx-auto" style="padding: 9px">
+    <input type="button" v-on:click="searchByCategory" class="feedback" style="margin-right: 5px" value="SEARCH">
   </div>
 
   <div class="col-sm-10 mx-auto">

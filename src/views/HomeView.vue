@@ -4,8 +4,11 @@
 
     <input v-model="search" placeholder="search ...">
 
-    <div id="mybutton3" class="col-sm-6 mx-auto" style="padding: 9px">
-      <input type="button" v-on:click="searchPost" class="feedback" style="margin-right: 5px" value="SEARCH">
+    <div class="col-sm-6 mx-auto" style="padding: 9px">
+      <input type="button" v-on:click="searchPost" class="feedback" style="margin-right: 5px" value="Search">
+    </div>
+    <div class="col-sm-6 mx-auto" style="padding: 9px">
+      <input type="button" v-on:click="searchByCategory" class="feedback" style="margin-right: 5px" value="Search by category">
     </div>
 
     <div>
@@ -63,6 +66,7 @@ img {
   left: 5px;
 }
 
+
 strong {
   font-weight: bold;
 }
@@ -73,6 +77,7 @@ strong {
 import HelloWorld from "@/components/HelloWorld";
 import PostComponent from "@/components/PostComponent";
 import axios from "axios";
+import router from "@/router";
 
 export default {
   name: 'HomeView',
@@ -127,7 +132,9 @@ export default {
       }
       this.posts = (await axios.get("api/public?page=0&orderBy=id&header=" + this.search)).data
     },
-
+    searchByCategory() {
+      router.push("/categories")
+    },
     async nextPage() {
       if ((await axios.get(this.pageTypeUrl)).data.length > 0) {
         this.posts = (await axios.get(this.pageTypeUrl)).data

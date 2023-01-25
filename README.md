@@ -1,6 +1,24 @@
-**Frontend Readme**
+## Frontend for e-shop
 
-In order to run our website we need firstly to run frontend on server http://team5.hopto.org and then backend on server http://team5.hopto.org/api/hello
-In order to run locally, we need firstly to set up properties and make docker-compose up for backend and for frontend docker-compose up.
+### Use technologies:
+- Vue
+- JavaScript
+- Docker
 
-In order to run this you need to import 2 things. Firstly write in IntelliJ IDEA terminal cd node_modules and then npm install bootstrap --save and then npm install axios --save After importing those things you can run frontend, that is why the pipeline build test failed
+### Functional:
+
+- Home page with search bar and posts displaying
+- About page
+- Login
+- Registration
+- Page where can display posts by category
+- User profile with ability create posts, view created posts by user and user orders.
+
+### Frontend installation:
+1. Install IdeaProject
+2. Install Node.js
+3. write in IntelliJ IDEA terminal following commands:
+- `cd node_modules`
+- `npm install bootstrap --save`
+- `npm install axios --save`
+
